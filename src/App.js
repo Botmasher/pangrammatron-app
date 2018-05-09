@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InputSentence from './InputSentence';
 import './App.css';
 
 class App extends Component {
@@ -9,12 +10,20 @@ class App extends Component {
     };
   }
 
-  handleInput = e => this.setState({ sentence: e.target.value });
+  handleInput = sentence => this.setState({ sentence });
+
+  handleSubmit = () => console.log(this.state.sentence);
 
   render() {
     return (
       <div className="App">
-        <input type="text" value={this.state.sentence} onChange={this.handleInput} />
+        <h1>Pangrammatron</h1>
+        <InputSentence
+          sentence={sentence}
+          handleInput={this.handleInput}
+          handleSubmit={this.handleSubmit}
+        />
+        <div className="footer"></div>
       </div>
     );
   }
