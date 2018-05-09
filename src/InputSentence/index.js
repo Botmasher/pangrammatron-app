@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-const InputSentence = ({ sentence, handleInput }) => {
+const InputSentence = ({ sentence, handleInput, handleSubmit }) => {
   return (
     <div className="input-container">
       <input

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import InputSentence from './InputSentence';
+import DisplayAnswer from './DisplayAnswer';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      sentence: ''
+      sentence: '',
+      pangramAnswer: false,
+      panphoneAnswer: false
     };
   }
 
@@ -15,6 +18,7 @@ class App extends Component {
   handleSubmit = () => console.log(this.state.sentence);
 
   render() {
+    const { sentence, pangramAnswer, panphoneAnswer } = this.state;
     return (
       <div className="App">
         <h1>Pangrammatron</h1>
@@ -22,6 +26,11 @@ class App extends Component {
           sentence={sentence}
           handleInput={this.handleInput}
           handleSubmit={this.handleSubmit}
+        />
+        <DisplayAnswer
+          sentence={sentence}
+          pangramAnswer={pangramAnswer}
+          panphoneAnswer={panphoneAnswer}
         />
         <div className="footer"></div>
       </div>
