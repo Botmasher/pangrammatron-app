@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InputSentence from './InputSentence';
 import DisplayAnswer from './DisplayAnswer';
 import './App.css';
+import { Pangrammatron } from './utils/pangrammatron';
 
 class App extends Component {
   constructor(props) {
@@ -9,13 +10,26 @@ class App extends Component {
     this.state = {
       sentence: '',
       pangramAnswer: false,
-      panphoneAnswer: false
+      panphoneAnswer: false,
+      pangrammatron: null
     };
   }
 
-  handleInput = sentence => this.setState({ sentence });
+  handleInput = sentence => {
+    this.setState({ sentence }, () => {
 
-  handleSubmit = () => console.log(this.state.sentence);
+    });
+  }
+
+  handleSubmit = () => {
+    console.log(this.state.sentence);
+  }
+
+  componentDidMount() {
+    !this.state.pangrammatron && (
+
+    );
+  }
 
   render() {
     const { sentence, pangramAnswer, panphoneAnswer } = this.state;
