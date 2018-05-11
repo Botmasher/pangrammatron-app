@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import InputSentence from './InputSentence';
 import DisplayAnswer from './DisplayAnswer';
 import './App.css';
+
+// TODO load Pangrammatron outside App
 import { Pangrammatron } from './utils/pangrammatron';
+import PhonesDictionary from './utils/pangrammatron/cmu-api';
 
 class App extends Component {
   constructor(props) {
@@ -16,8 +19,13 @@ class App extends Component {
   }
 
   handleInput = sentence => {
+    if (!this.state.pangrammatron) {
+      this.setState({ pangramAnswer: 'still loading ...' });
+      return;
+    }
     this.setState({ sentence }, () => {
-
+      console.log(this.state.pangrammatron.isPangram(sentence));
+      console.log(this.state.pangrammatron.isPanphone(sentence));
     });
   }
 
@@ -26,9 +34,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    !this.state.pangrammatron && (
-
-    );
+    if (!this.state.pangrammatron) {
+      const cmu = new PhonesDictionary();
+      const pan = new Pangrammatron();
+      pan.initialize(() => cmu.gatherPhones(), () => cmu.gatherEntries())
+        .then(() => this.setState({ pangrammatron: pan }));
+    }
   }
 
   render() {

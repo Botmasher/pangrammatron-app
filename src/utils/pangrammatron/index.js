@@ -68,8 +68,8 @@ class Pangrammatron {
 	}
 
 	breakIntoWords(text) {
-		const words = text.toUpperCase().match(/([A-Z](\'[A-Z]+)?)+/g);
-		const splitText = text.trim().split(" ");
+		const words = text.toUpperCase().match(/([A-Z]('[A-Z]+)?)+/g);
+		//const splitText = text.trim().split(" ");
 		return new Set(words);
 	}
 
@@ -91,9 +91,9 @@ class Pangrammatron {
 	}
 
 	howPangrammatic(text) {
-		if (!this.alphabet) throw "No alphabet defined before calling Pangrammatron.howPangrammatic"
+		//if (!this.alphabet) throw "No alphabet defined before calling Pangrammatron.howPangrammatic";
 
-		const words = text.toUpperCase().match(/([A-Z](\'[A-Z]+)?)+/g);
+		const words = text.toUpperCase().match(/([A-Z]('[A-Z]+)?)+/g);
 		const cleanedText = words.join();
 
 		if (this.memo.grams.cleanedText) return this.memo.grams.cleanedText.size;
@@ -107,10 +107,10 @@ class Pangrammatron {
 	}
 
 	howPanphonic(text) {
-		if (!this.inventory) throw "No inventory defined before calling Pangrammatron.howPanphonic";
+		//if (!this.inventory) throw "No inventory defined before calling Pangrammatron.howPanphonic";
 
 		// split and scrub text
-		const words = text.toUpperCase().match(/([A-Z]+(\'[A-Z]+)?)/g);
+		const words = text.toUpperCase().match(/([A-Z]+('[A-Z]+)?)/g);
 		const cleanedText = words.join();
 
 		if (this.memo.phones.cleanedText) return (this.memo.phones.cleanedText);
