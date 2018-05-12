@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import InputSentence from './InputSentence';
 import DisplayAnswer from './DisplayAnswer';
-import './App.css';
-
-// TODO load Pangrammatron outside App
+import { phones, dict } from './store';
 import { Pangrammatron } from './utils/pangrammatron';
-import PhonesDictionary from './utils/pangrammatron/cmu-api';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -35,10 +33,9 @@ class App extends Component {
 
   componentDidMount() {
     if (!this.state.pangrammatron) {
-      const cmu = new PhonesDictionary();
-      const pan = new Pangrammatron();
-      pan.initialize(() => cmu.gatherPhones(), () => cmu.gatherEntries())
-        .then(() => this.setState({ pangrammatron: pan }));
+      const pangrammatron = new Pangrammatron(alphabet='abcdefghijklmnopqrstuvwxyz', inventory=phones, dictionary=dict, language='en');
+      console.log(dict.sound);
+      this.setState({ pangrammatron });
     }
   }
 

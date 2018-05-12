@@ -1,6 +1,14 @@
-const fs = require('fs');
-
-console.log()
+const readRawText = file => {
+	const raw = new XMLHttpRequest();
+	raw.open('GET', file);
+	raw.onreadystatechange = () => {
+		if (raw.readyState === 4 && (raw.status === 200 || raw.status === 0)) {
+			console.log(raw.responseText);
+			return (raw.responseText);
+		}
+	};
+	raw.send(null);
+};
 
 class PhonesDictionary {
 	constructor() {
@@ -15,45 +23,49 @@ class PhonesDictionary {
 	}
 
 	gatherPhones(cb) {
-		return new Promise((resolve, reject) => {
-			fs.readFile(`../${this.paths.en.phon}`,
-				(error, data) => {
-					const phones = new Set();
-					for (let line of data.toString('utf-8').match(/[^\n]+/g)) {
-						phones.add(line.split('\t')[0]);
-					}
-					this.phones = phones;
-					resolve(this.phones);
-				}
-			);
-		});
+		return new Promise((resolve, reject) => fetch(`http://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/cmudict-0.7b.phones`, { method: 'GET' }))
+			.then(data => {
+				console.log(data);
+			});
+
+		// 	fs.readFile(`../${this.paths.en.phon}`,
+		// 		(error, data) => {
+		// 			const phones = new Set();
+		// 			for (let line of data.toString('utf-8').match(/[^\n]+/g)) {
+		// 				phones.add(line.split('\t')[0]);
+		// 			}
+		// 			this.phones = phones;
+		// 			resolve(this.phones);
+		// 		}
+		// 	);
+		//});
 	}
 
 	gatherEntries() {
 		return new Promise((resolve, reject) => {
-			fs.readFile(`../${this.paths.en.lex}`,
-				(error, data) => {
-					let word = '';
-					let sounds = [];
-					// search lines for formatted entries
-					for (let line of data.toString('utf-8').match(/[^\n]+/g)) {
-						const l_elems = line.match(/[^ \t]+/g);
-						if (l_elems[0].match(/[#;{}]/g)) continue;
-						sounds = l_elems && l_elems.length > 1 && l_elems[1].match(/[A-Z]([A-Z]?)/g)
-							? l_elems.slice(1).map(phone => (
-									phone.match(/[A-Z]([A-Z])?/g)[0]		// strip phones of trailing numbers
-								))
-							: []
-						;
-						// find and store real entries as 'word': [phone_0, ..., phone_n]
-						if (sounds && sounds.length > 0 && this.phones.has(sounds[0])) {
-							word = l_elems[0].match(/[A-Z]+/g)[0];
-							this.entries[word] = sounds;
-						}
-					}
-					resolve(this.entries);
-				}
-			);
+		// 	fs.readFile(`../${this.paths.en.lex}`,
+		// 		(error, data) => {
+		// 			let word = '';
+		// 			let sounds = [];
+		// 			// search lines for formatted entries
+		// 			for (let line of data.toString('utf-8').match(/[^\n]+/g)) {
+		// 				const l_elems = line.match(/[^ \t]+/g);
+		// 				if (l_elems[0].match(/[#;{}]/g)) continue;
+		// 				sounds = l_elems && l_elems.length > 1 && l_elems[1].match(/[A-Z]([A-Z]?)/g)
+		// 					? l_elems.slice(1).map(phone => (
+		// 							phone.match(/[A-Z]([A-Z])?/g)[0]		// strip phones of trailing numbers
+		// 						))
+		// 					: []
+		// 				;
+		// 				// find and store real entries as 'word': [phone_0, ..., phone_n]
+		// 				if (sounds && sounds.length > 0 && this.phones.has(sounds[0])) {
+		// 					word = l_elems[0].match(/[A-Z]+/g)[0];
+		// 					this.entries[word] = sounds;
+		// 				}
+		// 			}
+		// 			resolve(this.entries);
+		// 		}
+		// 	);
 		});
 	}
 }
