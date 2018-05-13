@@ -33,7 +33,11 @@ class App extends Component {
 
   componentDidMount() {
     const phones = new PhonesDictionary();
-    phones.gatherPhones().then(res => res.text()).then(data => console.log(data));
+    phones.gatherPhones()
+      .then(phones => console.log(phones))
+      .then(() => {
+        phones.gatherEntries().then(entries => console.log(entries.CAT));
+      });
     if (!this.state.pangrammatron) {
       //const pangrammatron = new Pangrammatron(alphabet='abcdefghijklmnopqrstuvwxyz', inventory=phones, dictionary=dict, language='en');
       //console.log(phones);
