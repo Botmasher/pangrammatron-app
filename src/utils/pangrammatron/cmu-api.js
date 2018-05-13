@@ -10,7 +10,7 @@ const readRawText = file => {
 	raw.send(null);
 };
 
-class PhonesDictionary {
+export class PhonesDictionary {
 	constructor() {
 		this.paths = {
 			en: {
@@ -22,12 +22,9 @@ class PhonesDictionary {
 		this.entries = {};
 	}
 
-	gatherPhones(cb) {
-		return new Promise((resolve, reject) => fetch(`http://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/cmudict-0.7b.phones`, { method: 'GET' }))
-			.then(data => {
-				console.log(data);
-			});
-
+	gatherPhones() {
+		const req = new Request(`./dicts/en/cmu/index.js`);
+		return fetch(req);
 		// 	fs.readFile(`../${this.paths.en.phon}`,
 		// 		(error, data) => {
 		// 			const phones = new Set();
@@ -69,5 +66,3 @@ class PhonesDictionary {
 		});
 	}
 }
-
-export default PhonesDictionary;
