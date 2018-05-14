@@ -29,13 +29,10 @@ export class PhonesDictionary {
 			// search lines for formatted entries
 			for (let line of data.toString('utf-8').match(/[^\n]+/g)) {
 				const lineElements = line.match(/[^ \t]+/g);
-
 				// discard non-word lines
-				if (!lineElements[0].match(/[A-Z]+('[A-Z]+)?/g) && !lineElements[0][0].match(/[A-Z]/g)) continue;
+				if (!lineElements || lineElements[0].match(/[^A-Z']/g) || !lineElements[0][0].match(/[A-Z]/g)) continue;
 				word = lineElements[0].match(/[A-Z]+('[A-Z]+)?/g)[0];
-
-				word === "HAWAII" && console.log(word);
-				sounds = lineElements && lineElements.length > 1  && lineElements[1].match(/[A-Z]([A-Z]?)/g)
+				sounds = lineElements.length > 1  && lineElements[1].match(/[A-Z]([A-Z]?)/g)
 					? lineElements.slice(1).map(phone => (
 							phone.match(/[A-Z]([A-Z]?)/g)[0] 		// strip phones of trailing numbers
 						))
@@ -43,7 +40,6 @@ export class PhonesDictionary {
 				;
 				// find and store real entries in word:[phones] pairs
 				if (sounds && sounds.length > 0 && this.phones.has(sounds[0])) {
-					word = lineElements[0].match(/[A-Z]+/g)[0];
 					this.entries[word] = sounds;
 				}
 			}

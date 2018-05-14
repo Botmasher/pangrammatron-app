@@ -36,7 +36,7 @@ class App extends Component {
     phones.gatherPhones()
       .then(phones => console.log(phones))
       .then(() => {
-        phones.gatherEntries().then(entries => console.log(entries.CAT));
+        phones.gatherEntries().then(entries => console.log(entries['DON\'T']));
       });
     if (!this.state.pangrammatron) {
       //const pangrammatron = new Pangrammatron(alphabet='abcdefghijklmnopqrstuvwxyz', inventory=phones, dictionary=dict, language='en');
