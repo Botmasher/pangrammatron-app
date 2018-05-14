@@ -94,6 +94,7 @@ class Pangrammatron {
 		//if (!this.alphabet) throw "No alphabet defined before calling Pangrammatron.howPangrammatic";
 
 		const words = text.toUpperCase().match(/([A-Z]('[A-Z]+)?)+/g);
+		if (words === null) return 0;
 		const cleanedText = words.join();
 
 		if (this.memo.grams.cleanedText) return this.memo.grams.cleanedText.size;
@@ -111,6 +112,7 @@ class Pangrammatron {
 
 		// split and scrub text
 		const words = text.toUpperCase().match(/([A-Z]+('[A-Z]+)?)/g);
+		if (words === null) return 0;
 		const cleanedText = words.join();
 
 		if (this.memo.phones.cleanedText) return (this.memo.phones.cleanedText);

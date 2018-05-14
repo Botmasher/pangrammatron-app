@@ -10,7 +10,7 @@ export class PhonesDictionary {
 		this.entries = {};
 	}
 
-	gatherPhones() {
+	gatherPhones = () => {
 		return fetch(new Request(this.paths.en.phon)).then(res => res.text()).then(data => {
 			const phones = new Set();
 			for (let line of data.toString('utf-8').match(/[^\n]+/g)) {
@@ -22,7 +22,7 @@ export class PhonesDictionary {
 	}
 
 	// TODO fix cutting lex items so that e.g. HAWAII can return phones associated with HAWAII'S
-	gatherEntries() {
+	gatherEntries = () => {
 		return fetch(new Request(this.paths.en.lex)).then(res => res.text()).then(data => {
 			let word = '';
 			let sounds = [];

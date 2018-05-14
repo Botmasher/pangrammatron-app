@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-const InputSentence = ({ sentence, handleInput, handleSubmit }) => {
+const InputSentence = ({ sentence, handleInput }) => {
   return (
     <div className="input-container">
       <input
@@ -9,7 +9,6 @@ const InputSentence = ({ sentence, handleInput, handleSubmit }) => {
         type="text" value={sentence}
         onChange={(e) => handleInput(e.target.value)}
       />
-      <button className="input-test-btn" onClick={handleSubmit}>submit</button>
     </div>
   );
 }

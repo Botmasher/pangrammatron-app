@@ -16,32 +16,25 @@ class App extends Component {
     };
   }
 
+  // TODO debounce
   handleInput = sentence => {
     if (!this.state.pangrammatron) {
       this.setState({ pangramAnswer: 'still loading ...' });
-      return;
+    } else {
+      this.setState({
+        sentence,
+        pangramAnswer: this.state.pangrammatron.isPangram(sentence),
+        panphoneAnswer: this.state.pangrammatron.isPanphone(sentence)
+      });
     }
-    this.setState({ sentence }, () => {
-      //console.log(this.state.pangrammatron.isPangram(sentence));
-      //console.log(this.state.pangrammatron.isPanphone(sentence));
-    });
-  }
-
-  handleSubmit = () => {
-    console.log(this.state.sentence);
   }
 
   componentDidMount() {
-    const phones = new PhonesDictionary();
-    phones.gatherPhones()
-      .then(phones => console.log(phones))
-      .then(() => {
-        phones.gatherEntries().then(entries => console.log(entries['DON\'T']));
-      });
     if (!this.state.pangrammatron) {
-      //const pangrammatron = new Pangrammatron(alphabet='abcdefghijklmnopqrstuvwxyz', inventory=phones, dictionary=dict, language='en');
-      //console.log(phones);
-      //this.setState({ pangrammatron });
+      const phones = new PhonesDictionary();
+      const pangrammatron = new Pangrammatron('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+      pangrammatron.initialize(phones.gatherPhones, phones.gatherEntries)
+        .then(() => this.setState({ pangrammatron }));
     }
   }
 
@@ -53,7 +46,6 @@ class App extends Component {
         <InputSentence
           sentence={sentence}
           handleInput={this.handleInput}
-          handleSubmit={this.handleSubmit}
         />
         <DisplayAnswer
           sentence={sentence}
