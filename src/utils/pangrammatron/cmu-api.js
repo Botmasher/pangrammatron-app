@@ -17,6 +17,7 @@ export class PhonesDictionary {
 				phones.add(line.split('\t')[0]);
 			}
 			this.phones = phones;
+			console.log(phones);
 			return this.phones;
 		});
 	}
@@ -43,6 +44,7 @@ export class PhonesDictionary {
 					this.entries[word] = sounds;
 				}
 			}
+			console.log(this.entries);
 			return this.entries;
 		});
 	}
