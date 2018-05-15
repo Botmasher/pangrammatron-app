@@ -17,4 +17,9 @@ const InputSentence = ({ sentence, handleInput }) => {
   );
 }
 
+InputSentence.propTypes = {
+  sentence: PropTypes.string.isRequired,
+  handleInput: PropTypes.func.isRequired
+};
+
 export default InputSentence;
