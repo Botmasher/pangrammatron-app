@@ -16,7 +16,7 @@ class App extends Component {
     };
   }
 
-  // TODO debounce
+  // TODO transition response between calculating (bouncing input)
   handleInput = sentence => {
     if (!this.state.pangrammatron) {
       this.setState({ pangramAnswer: 'still loading ...' });
