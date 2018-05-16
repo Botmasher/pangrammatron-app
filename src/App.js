@@ -3,6 +3,7 @@ import InputSentence from './InputSentence';
 import DisplayAnswer from './DisplayAnswer';
 import { Pangrammatron } from './utils/pangrammatron';
 import { PhonesDictionary } from './utils/pangrammatron/cmu-api';
+import { connect } from 'react-redux';
 import './App.css';
 
 class App extends Component {

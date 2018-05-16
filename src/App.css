@@ -13,3 +13,38 @@
   padding: 20px;
   color: white;
 }
+
+@keyframes fade-out {
+  0% { opacity: 1; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@-o-keyframes fade-out {
+  0% { opacity: 1; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@-moz-keyframes fade-out {
+  0% { opacity: 1; -moz-opacity: 1; }
+  50% { opacity: 1; -moz-opacity: 1; }
+  100% { opacity: 0; -moz-opacity: 0; }
+}
+@-webkit-keyframes fade-out {
+  0% { opacity: 1; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.answer-container .answer-pangram {
+  -webkit-animation: fade-out 1s linear;
+  -moz-animation: fade-out 1s linear;
+  -o-animation: fade-out 1s linear;
+  animation: fade-out 1s linear;
+}
+
+.answer-container .answer-panphone {
+  -webkit-animation: fade-out 1s linear;
+  -moz-animation: fade-out 1s linear;
+  -o-animation: fade-out 1s linear;
+  animation: fade-out 1s linear;
+}
