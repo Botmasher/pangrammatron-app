@@ -14,37 +14,22 @@
   color: white;
 }
 
-@keyframes fade-out {
-  0% { opacity: 1; }
+@keyframes fade {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
   50% { opacity: 1; }
   100% { opacity: 0; }
 }
-@-o-keyframes fade-out {
-  0% { opacity: 1; }
-  50% { opacity: 1; }
-  100% { opacity: 0; }
-}
-@-moz-keyframes fade-out {
-  0% { opacity: 1; -moz-opacity: 1; }
-  50% { opacity: 1; -moz-opacity: 1; }
-  100% { opacity: 0; -moz-opacity: 0; }
-}
-@-webkit-keyframes fade-out {
-  0% { opacity: 1; }
-  50% { opacity: 1; }
-  100% { opacity: 0; }
+
+.answer-container {
 }
 
 .answer-container .answer-pangram {
-  -webkit-animation: fade-out 1s linear;
-  -moz-animation: fade-out 1s linear;
-  -o-animation: fade-out 1s linear;
-  animation: fade-out 1s linear;
+  opacity: 0;
+  animation: fade 5s linear 0.25s forwards;
 }
 
 .answer-container .answer-panphone {
-  -webkit-animation: fade-out 1s linear;
-  -moz-animation: fade-out 1s linear;
-  -o-animation: fade-out 1s linear;
-  animation: fade-out 1s linear;
+  opacity: 0;
+  animation: fade 5s linear 0.5s forwards;
 }
