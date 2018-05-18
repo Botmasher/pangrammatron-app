@@ -21,9 +21,6 @@
   100% { opacity: 0; }
 }
 
-.answer-container {
-}
-
 .answer-container .answer-pangram {
   opacity: 0;
   animation: fade 5s linear 0.25s forwards;
