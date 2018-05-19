@@ -3,6 +3,7 @@ import InputSentence from './InputSentence';
 import DisplayAnswer from './DisplayAnswer';
 import { Pangrammatron } from './utils/pangrammatron';
 import { PhonesDictionary } from './utils/pangrammatron/cmu-api';
+import { readPhones, readEntries } from './actions';
 import { connect } from 'react-redux';
 import './App.css';
 
@@ -17,7 +18,7 @@ class App extends Component {
     };
   }
 
-  // TODO transition response between calculating (bouncing input)
+  // TODO move pangrammatron to tools and just dispatch actions here
   handleInput = sentence => {
     if (!this.state.pangrammatron) {
       this.setState({ pangramAnswer: 'still loading ...' });
@@ -41,6 +42,9 @@ class App extends Component {
 
   render() {
     const { sentence, pangramAnswer, panphoneAnswer } = this.state;
+    const { phones, entries } = this.props;
+    console.log(phones);
+    console.log(entries);
     return (
       <div className="App">
         <h1>Pangrammatron</h1>
@@ -59,4 +63,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ phones, entries }) => ({
+	phones,
+  entries
+});
+
+const mapDispatchToProps = dispatch => ({
+  readPhones: () => dispatch(readPhones()),
+  readEntries: () => dispatch(readEntries())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
