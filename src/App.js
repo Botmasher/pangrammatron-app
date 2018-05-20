@@ -36,7 +36,15 @@ class App extends Component {
       const phones = new PhonesDictionary();
       const pangrammatron = new Pangrammatron('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
       pangrammatron.initialize(phones.gatherPhones, phones.gatherEntries)
-        .then(() => this.setState({ pangrammatron }));
+        .then(() => {
+          this.setState({ pangrammatron }, () => {
+            this.props.readPhones(this.state.pangrammatron);
+            this.props.readEntries(this.state.pangrammatron);
+          });
+        });
+    } else {
+      this.props.readPhones(this.state.pangrammatron);
+      this.props.readEntries(this.state.pangrammatron);
     }
   }
 
@@ -69,8 +77,8 @@ const mapStateToProps = ({ phones, entries }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  readPhones: () => dispatch(readPhones()),
-  readEntries: () => dispatch(readEntries())
+  readPhones: pangrammatron => dispatch(readPhones(pangrammatron)),
+  readEntries: pangrammatron => dispatch(readEntries(pangrammatron))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
