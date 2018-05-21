@@ -14,13 +14,15 @@ class App extends Component {
       sentence: '',
       pangramAnswer: false,
       panphoneAnswer: false,
-      pangrammatron: null
+      pangrammatron: null,
+      phones: [],
+      dictionary: {}
     };
   }
 
   // TODO move pangrammatron to tools and just dispatch actions here
   handleInput = sentence => {
-    if (!this.state.pangrammatron) {
+    if (!this.state.phones || !this.state.dictionary) {
       this.setState({ pangramAnswer: 'still loading ...' });
     } else {
       this.setState({
@@ -51,8 +53,6 @@ class App extends Component {
   render() {
     const { sentence, pangramAnswer, panphoneAnswer } = this.state;
     const { phones, entries } = this.props;
-    console.log(phones);
-    console.log(entries);
     return (
       <div className="App">
         <h1>Pangrammatron</h1>
