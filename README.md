@@ -1,6 +1,6 @@
 # Pangrammatron App
 
-A clean interface for checking if a sentence is a pangram or a panphone. It's a React frontend .
+This project aims to be a clean interface for checking if a sentence is a pangram or a panphone. It's a React frontend for the "Pangrammatron" program I created.
 
 ## Description
 The app contains an input field for entering a sample of text. It passes that sample to an integrated demo of [Pangrammatron](https://github.com/Botmasher/pangrammatron) to check if it contains every letter of the alphabet (is a pangram) and if it contains every sound in the language (is a panphone). The demonstration only supports checking English language input.
